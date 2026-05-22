@@ -19,12 +19,12 @@ public class Servicios {
         this.paquetes = LectorCSV.leerPaquetes(pathPaquetes);
         this.mapeoCodPaquete= new HashMap<>();
         this.mapeoContAlimentos=new HashMap<>();
-            List<Paquete> paquetesT= new ArrayList<>();
-            List<Paquete> paquetesF= new ArrayList<>();
+        this.mapeoContAlimentos.put(true, new ArrayList<>());
+        this.mapeoContAlimentos.put(false, new ArrayList<>());
 
             for (Paquete p : paquetes) {
                 mapeoCodPaquete.put(p.getCodigoPaquete(), p);
-                mapeoContAlimentos.put(p.isContieneAlimentos(), p);
+                mapeoContAlimentos.get(p.isContieneAlimentos()).add(p);
             }
 
     }
@@ -39,12 +39,12 @@ public class Servicios {
 
     /*Expresar la complejidad temporal del servicio 2.*/
     public List<Paquete> servicio2(boolean contieneAlimentos) {
-        
+        return mapeoContAlimentos.get(contieneAlimentos);
     }
 
     /*Expresar la complejidad temporal del servicio 3.*/
     public List<Paquete> servicio3(int urgenciaMinima, int urgenciaMaxima) {
-
+        
     }
 
 }
