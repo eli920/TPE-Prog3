@@ -2,12 +2,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Servicios {
     private Camion[] camiones;
     private Paquete[] paquetes;
     private Map<String, Paquete> mapeoCodPaquete;
     private Map<Boolean, List<Paquete>> mapeoContAlimentos;
+    private TreeMap<Integer, List<Paquete>>indiceUrgencia;
     
     
     /*Expresar la complejidad temporal del constructor: O(n + m)
@@ -21,10 +23,19 @@ public class Servicios {
         this.mapeoContAlimentos=new HashMap<>();
         this.mapeoContAlimentos.put(true, new ArrayList<>());
         this.mapeoContAlimentos.put(false, new ArrayList<>());
+        this.indiceUrgencia = new TreeMap<>();
 
         for (Paquete p : paquetes) {
+            // Servicio 1
             mapeoCodPaquete.put(p.getCodigoPaquete(), p);
+            // Servicio 2
             mapeoContAlimentos.get(p.isContieneAlimentos()).add(p);
+            // Servicio 3
+            int urgencia = p.getNivelUrgencia();
+            if (!indiceUrgencia.containsKey(urgencia)) {
+                indiceUrgencia.put(urgencia, new ArrayList<>());
+            }
+            indiceUrgencia.get(urgencia).add(p);
         }
 
     }
@@ -45,7 +56,13 @@ public class Servicios {
 
     /*Expresar la complejidad temporal del servicio 3.*/
     public List<Paquete> servicio3(int urgenciaMinima, int urgenciaMaxima) {
-        return new ArrayList<>();
+        List<Paquete> resultado = new ArrayList<>();
+        Map<Integer, List<Paquete>> subrango = indiceUrgencia.subMap(urgenciaMinima, true, urgenciaMaxima, true);
+
+        for(List<Paquete> listaporUrgencia : subrango.values()){
+            resultado.addAll(listaporUrgencia);
+        }
+        return resultado;
 
     }
 
