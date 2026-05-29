@@ -68,6 +68,17 @@ public class Paquete {
         this.nivelUrgencia = nivelUrgencia;
     }
 
+    @Override
+    public String toString(){
+        return "Paquete{" +
+                "idPaquete=" + idPaquete +
+                ", codigoPaquete='" + codigoPaquete + '\'' +
+                ", peso=" + peso +
+                ", contieneAlimentos=" + contieneAlimentos +
+                ", nivelUrgencia=" + nivelUrgencia +
+                '}';
+    }
+
     
     
 }
