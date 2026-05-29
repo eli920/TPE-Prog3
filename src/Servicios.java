@@ -17,26 +17,13 @@ public class Servicios {
         El CSV recorre una vez el archivo de camiones y una vez el archivo de paquetes*/
 
     public Servicios(String pathCamiones, String pathPaquetes){
-        this.camiones = LectorCSV.leerCamiones(pathCamiones);
-        this.paquetes = LectorCSV.leerPaquetes(pathPaquetes);
-        this.mapeoCodPaquete= new HashMap<>();
         this.mapeoContAlimentos=new HashMap<>();
         this.mapeoContAlimentos.put(true, new ArrayList<>());
         this.mapeoContAlimentos.put(false, new ArrayList<>());
         this.indiceUrgencia = new TreeMap<>();
-
-        for (Paquete p : paquetes) {
-            // Servicio 1
-            mapeoCodPaquete.put(p.getCodigoPaquete(), p);
-            // Servicio 2
-            mapeoContAlimentos.get(p.isContieneAlimentos()).add(p);
-            // Servicio 3
-            int urgencia = p.getNivelUrgencia();
-            if (!indiceUrgencia.containsKey(urgencia)) {
-                indiceUrgencia.put(urgencia, new ArrayList<>());
-            }
-            indiceUrgencia.get(urgencia).add(p);
-        }
+        this.mapeoCodPaquete= new HashMap<>();
+        this.camiones = LectorCSV.leerCamiones(pathCamiones);
+        this.paquetes = LectorCSV.leerPaquetes(pathPaquetes, mapeoCodPaquete, mapeoContAlimentos, indiceUrgencia);
 
     }
 
