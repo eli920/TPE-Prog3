@@ -1,18 +1,42 @@
+import java.util.List;
+
 public class App {
     public static void main(String[] args) throws Exception {
 
-        Servicios servicio = new Servicios("Camiones.csv", "Paquetes.csv");
-       
-        // Para verificar que se cargó bien
-        // Camion[] camiones = LectorCSV.leerCamiones("Camiones.csv");
-        // Paquete[] paquetes = LectorCSV.leerPaquetes("Paquetes.csv");
+        // Rutas a los archivos CSV (ajustar según corresponda en tu proyecto)
+        String pathCamiones = "Camiones.csv";
+        String pathPaquetes = "Paquetes.csv";
 
-        // for (Camion c : camiones) {
-        //     System.out.println(c.getIdCamion() + " " + c.getPatente());
-        // }
+        // Inicializar los servicios
+        Servicios servicios = new Servicios(pathCamiones, pathPaquetes);
 
-        // for (Paquete p : paquetes) {
-        //     System.out.println(p.getIdPaquete() + " " + p.getCodigoPaquete());
-        // }
+        // Prueba - Servicio 1: Buscar paquete por código
+        System.out.println("--- RESULTADOS SERVICIO 1 ---");
+        String codigoBuscado = "P001";
+        Paquete paqueteEncontrado = servicios.servicio1(codigoBuscado);
+        if (paqueteEncontrado != null) {
+            System.out.println("Paquete encontrado: " + paqueteEncontrado);
+        } else {
+            System.out.println("No se encontró el paquete con código: " + codigoBuscado);
+        }
+
+        // Prueba - Servicio 2: Buscar paquetes que contienen (o no) alimentos
+        System.out.println("\n--- RESULTADOS SERVICIO 2 ---");
+        boolean buscarAlimentos = true; // Cambiar a false para probar lo opuesto
+        List<Paquete> paquetesAlimentos = servicios.servicio2(buscarAlimentos);
+        System.out.println("Paquetes con alimentos (" + buscarAlimentos + "): " + paquetesAlimentos.size());
+        for (Paquete p : paquetesAlimentos) {
+            System.out.println(p);
+        }
+
+        // Prueba - Servicio 3: Buscar paquetes por rango temporal de urgencia
+        System.out.println("\n--- RESULTADOS SERVICIO 3 ---");
+        int minimo = 10;
+        int maximo = 80;
+        List<Paquete> paquetesPorUrgencia = servicios.servicio3(minimo, maximo);
+        System.out.println("Paquetes con urgencia entre " + minimo + " y " + maximo + ": " + paquetesPorUrgencia.size());
+        for (Paquete p : paquetesPorUrgencia) {
+            System.out.println(p);
+        }
     }
 }

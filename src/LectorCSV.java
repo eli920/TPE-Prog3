@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class LectorCSV {
 
@@ -25,7 +29,7 @@ public class LectorCSV {
         return camiones;
     }
 
-    public static Paquete[] leerPaquetes(String path) {
+    public static Paquete[] leerPaquetes(String path, Map<String, Paquete> mapeoCodPaquete, Map<Boolean, List<Paquete>> mapeoContAlimentos, TreeMap<Integer, List<Paquete>> indiceUrgencia ) {
         Paquete[] paquetes = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
@@ -39,6 +43,20 @@ public class LectorCSV {
                 boolean alimentos = partes[3].equals("1");
                 int urgencia = Integer.parseInt(partes[4]);
                 paquetes[i] = new Paquete(id, codigo, peso, alimentos, urgencia);
+                Paquete p = paquetes[i];
+
+                //servicio 1
+                mapeoCodPaquete.put(p.getCodigoPaquete(), p);
+
+                //servicio 2
+                mapeoContAlimentos.get(p.isContieneAlimentos()).add(p);
+
+                // Servicio 3
+                urgencia = p.getNivelUrgencia();
+                if (!indiceUrgencia.containsKey(urgencia)) {
+                    indiceUrgencia.put(urgencia, new ArrayList<>());
+                }
+                indiceUrgencia.get(urgencia).add(p);
             }
             br.close();
         } catch (IOException e) {
