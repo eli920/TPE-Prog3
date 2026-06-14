@@ -49,7 +49,7 @@ public class LectorCSV {
                 mapeoCodPaquete.put(p.getCodigoPaquete(), p);
 
                 //servicio 2
-                mapeoContAlimentos.get(p.isContieneAlimentos()).add(p);
+                mapeoContAlimentos.get(p.contieneAlimentos()).add(p);
 
                 // Servicio 3
                 urgencia = p.getNivelUrgencia();

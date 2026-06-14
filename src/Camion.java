@@ -89,5 +89,34 @@ public class Camion {
         return pesoAcumulado + paquete.getPeso() <= capacidad;
     }
 
+
+     public Camion copia() {
+
+        Camion copia = new Camion(
+                this.idCamion,
+                this.patente,
+                this.estaRefrigerado,
+                this.capacidad
+        );
+
+        for (Paquete p : this.paquetesAsignados) {
+            copia.agregarPaquete(p);
+        }
+
+        return copia;
+    }
+
+    @Override
+    public String toString() {
+        return "Camion{" +
+                "idCamion=" + idCamion +
+                ", patente='" + patente + '\'' +
+                ", estaRefrigerado=" + estaRefrigerado +
+                ", capacidad=" + capacidad +
+                ", pesoAcumulado=" + pesoAcumulado +
+                ", paquetesAsignados=" + paquetesAsignados +
+                '}';
+    }
+
     
 }
