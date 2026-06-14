@@ -53,5 +53,14 @@ public class Servicios {
 
     }
 
+    //Obtener los camiones y paquetes para el backtracking y greedy
+    public Camion[] getCamiones() {
+        return camiones;
+    }   
+
+    public Paquete[] getPaquetes() {
+        return paquetes;
+    }
+
 }
 

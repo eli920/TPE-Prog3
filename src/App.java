@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        // Rutas a los archivos CSV (ajustar según corresponda en tu proyecto)
+        // Rutas a los archivos CSV 
         String pathCamiones = "Camiones.csv";
         String pathPaquetes = "Paquetes.csv";
 
@@ -38,5 +41,51 @@ public class App {
         for (Paquete p : paquetesPorUrgencia) {
             System.out.println(p);
         }
+
+        
+        // RESULTADOS BACKTRACKING ---------------------------------------------------------------------------------------------------------
+        System.out.println("\n--- RESULTADOS BACKTRACKING ---");
+
+        Backtracking bt = new Backtracking(Arrays.asList(servicios.getPaquetes()),new ArrayList<>());//Arrays.asList() sirve para convertir un arreglo en una List.
+
+        List<Camion> solucion = bt.asignarPaquetes(Arrays.asList(servicios.getCamiones()));
+
+        System.out.println("Solución obtenida:");
+
+        System.out.println("Cantidad de camiones utilizados: " + (solucion.size() - 1)); // se resta el depósito
+
+        for (Camion c : solucion) {
+
+            if (c.getIdCamion() != -1) { // no mostrar el depósito
+
+                System.out.println("\nCamión "
+                        + c.getIdCamion()
+                        + " (" + c.getPatente() + ")");
+
+                if (c.getPaquetesAsignados().isEmpty()) {
+                    System.out.println("   Sin asignaciones");
+                } else {
+
+                    for (Paquete p : c.getPaquetesAsignados()) {
+                        System.out.println("   "
+                                + p.getCodigoPaquete()
+                                + " - "
+                                + p.getPeso()
+                                + " kg");
+                    }
+                }
+            }
+        }
+
+        
+        System.out.println("\nPeso no asignado: "
+                + bt.getPesoNoAsignadoMin()
+                + " kg");
+
+        System.out.println("Estados generados: "
+                + bt.getEstadosGenerados());
+
+       
+        
     }
 }
