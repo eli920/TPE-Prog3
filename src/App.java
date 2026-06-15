@@ -85,7 +85,39 @@ public class App {
         System.out.println("Estados generados: "
                 + bt.getEstadosGenerados());
 
+        
+         // RESULTADOS GREEDY ---------------------------------------------------------------------------------------------------
+        System.out.println("\n--- RESULTADOS GREEDY ---");
+
+        Greedy greedy = new Greedy(Arrays.asList(servicios.getPaquetes()));
+
+        List<Paquete> noAsignados = greedy.asignarPaquetes(Arrays.asList(servicios.getCamiones()));
+
+        System.out.println("Solución obtenida:");
+
+        for (Camion c : Arrays.asList(servicios.getCamiones())) {
+            System.out.println("\nCamión "
+                    + c.getIdCamion()
+                    + " (" + c.getPatente() + ")");
+
+            if (c.getPaquetesAsignados().isEmpty()) {
+                System.out.println("   Sin asignaciones");
+            } else {
+                for (Paquete p : c.getPaquetesAsignados()) {
+                    System.out.println("   "
+                            + p.getCodigoPaquete()
+                            + " - "
+                            + p.getPeso()
+                            + " kg");
+                }
+            }
+        }
+
+        int pesoNoAsignado = noAsignados.stream().mapToInt(Paquete::getPeso).sum();
+        System.out.println("\nPeso no asignado: " + pesoNoAsignado + " kg");
+        System.out.println("Estados generados: " + greedy.getEstadosGenerados());
        
         
-    }
+    }   
+    
 }
