@@ -38,5 +38,18 @@ public class App {
         for (Paquete p : paquetesPorUrgencia) {
             System.out.println(p);
         }
+
+        // --- SEGUNDA PARTE: ASIGNACIÓN DE PAQUETES ---
+        List<Camion> camiones = servicios.getCamiones();
+        List<Paquete> paquetes = servicios.getPaquetes();
+
+        AsignadorPaquetes asignador = new AsignadorPaquetes();
+
+
+        System.out.println("\n--- EJECUTANDO BACKTRACKING ---");
+// Asegúrate de que el método imprima los resultados en el formato pedido
+        asignador.asignarPaquetes(paquetes, camiones);
+
+
     }
 }

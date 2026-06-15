@@ -9,11 +9,17 @@ Camiones.csv
 102;AAA002C;1;115
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Camion {
     private int idCamion;
     private String patente;
     private boolean estaRefrigerado;
     private int capacidad;
+
+    private int cargaActual = 0; //contador para llevar la suma de la carga de paquetes
+    private List<Paquete>paquetesAsignados = new ArrayList<>(); // lista de paqueetes que se agregan al camion
 
 
     public Camion(int idCamion, String patente, boolean estaRefrigerado, int capacidad) {
@@ -22,6 +28,32 @@ public class Camion {
         this.estaRefrigerado = estaRefrigerado;
         this.capacidad = capacidad;
     }
+
+    public boolean puedeCargar(Paquete paquete) {
+        // Regla 1: Capacidad
+        boolean cabePeso = (this.cargaActual + paquete.getPeso()) <= this.capacidad;
+        // Regla 2: Alimentos/Refrigeración
+        boolean cumpleFrio = !paquete.isContieneAlimentos() || this.estaRefrigerado; //es verdadera si el paquete NO contiene alimentos o si el camión SÍ está refrigerado.
+
+        return cabePeso && cumpleFrio; //no puede superar el peso y o el paquete no contiene alimento o el camion refrigerado
+
+    }
+
+    public void cargarPaquete(Paquete paquete) {
+        paquetesAsignados.add(paquete);
+        cargaActual += paquete.getPeso();
+    }
+
+    public void descargar(Paquete paquete) {
+        paquetesAsignados.remove(paquetesAsignados.size()-1);
+        cargaActual -= paquete.getPeso();
+    }
+
+    public List<Paquete> getPaquetesAsignados() {
+        return new ArrayList<>(paquetesAsignados);
+    }
+
+
 
     public int getIdCamion() {
         return idCamion;
@@ -55,7 +87,10 @@ public class Camion {
         this.capacidad = capacidad;
     }
 
-    
 
-    
+
+
+
+
+
 }

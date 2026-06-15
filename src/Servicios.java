@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Servicios {
     private Camion[] camiones;
@@ -10,6 +6,7 @@ public class Servicios {
     private Map<String, Paquete> mapeoCodPaquete;
     private Map<Boolean, List<Paquete>> mapeoContAlimentos;
     private TreeMap<Integer, List<Paquete>>indiceUrgencia;
+
     
     
     /*Expresar la complejidad temporal del constructor: O(n + m)
@@ -53,5 +50,16 @@ public class Servicios {
 
     }
 
+
+    public List<Camion> getCamiones() {
+        if (camiones == null) return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(camiones));
+    }
+
+
+    public List<Paquete> getPaquetes() {
+        if (paquetes == null) return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(paquetes));
+    }
 }
 
