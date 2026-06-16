@@ -50,6 +50,19 @@ public class App {
 // Asegúrate de que el método imprima los resultados en el formato pedido
         asignador.asignarPaquetes(paquetes, camiones);
 
+        //Greedy
+        System.out.println("\n--- EJECUTANDO Greedy ---");
+        Greedy g = new Greedy();
+        List<Camion> solucion = g.greedy(paquetes, camiones);
+
+        if (solucion != null) {
+            // presentarResultados usa la lista interna S; si prefieres, puedes
+            // exponer getters y presentar en main usando 'solucion' directamente.
+            g.presentarResultados();
+        } else {
+            System.out.println("No se encontró solución greedy.");
+        }
+
 
     }
 }

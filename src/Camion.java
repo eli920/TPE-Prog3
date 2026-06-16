@@ -87,7 +87,17 @@ public class Camion {
         this.capacidad = capacidad;
     }
 
-
+    @Override
+    public String toString() {
+        return "Camion{" +
+                "idCamion=" + idCamion +
+                ", patente='" + patente + '\'' +
+                ", refrigerado=" + (estaRefrigerado ? "sí" : "no") +
+                ", capacidad=" + capacidad +
+                ", cargaActual=" + cargaActual +
+                ", paquetes=" + paquetesAsignados +
+                '}';
+    }
 
 
 

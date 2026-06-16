@@ -58,6 +58,9 @@ public class AsignadorPaquetes {
 
     }
 
+
+
+
     private void registrarMejorSolucion() {
         mejorAsignacion.clear();
         for (Camion camion : camiones) {
