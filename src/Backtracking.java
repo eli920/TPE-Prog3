@@ -16,9 +16,9 @@ public class Backtracking {
     private int pesoNoAsignadoMin;
     private int estadosGenerados; // Variable para contar los estados generados durante el proceso de backtracking
 
-    public Backtracking(List<Paquete> paquetes, List<Camion> solucion) {
+    public Backtracking(List<Paquete> paquetes) {
         this.paquetes = paquetes;
-        this.solucion= solucion;
+        this.solucion = new ArrayList<>();
         this.pesoNoAsignadoMin = Integer.MAX_VALUE;
         this.estadosGenerados = 0;
     }

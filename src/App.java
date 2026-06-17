@@ -46,7 +46,7 @@ public class App {
         // RESULTADOS BACKTRACKING ---------------------------------------------------------------------------------------------------------
         System.out.println("\n--- RESULTADOS BACKTRACKING ---");
 
-        Backtracking bt = new Backtracking(Arrays.asList(servicios.getPaquetes()),new ArrayList<>());//Arrays.asList() sirve para convertir un arreglo en una List.
+        Backtracking bt = new Backtracking(Arrays.asList(servicios.getPaquetes()));
 
         List<Camion> solucion = bt.asignarPaquetes(Arrays.asList(servicios.getCamiones()));
 
