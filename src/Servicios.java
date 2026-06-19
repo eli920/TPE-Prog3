@@ -14,7 +14,8 @@ public class Servicios {
     
     /*Expresar la complejidad temporal del constructor: O(n + m)
         donde n = cantidad de camiones y m = cantidad de paquetes. 
-        El CSV recorre una vez el archivo de camiones y una vez el archivo de paquetes
+        Se recorren una única vez los archivos de camiones y paquetes para cargarlos
+        en memoria e indexarlos mediante las estructuras auxiliares utilizadas por los servicios.
     */
 
     public Servicios(String pathCamiones, String pathPaquetes){
