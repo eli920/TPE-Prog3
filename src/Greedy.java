@@ -1,12 +1,13 @@
 
 // Estrategia Greedy:
-// Se ordenan los paquetes de mayor a menor peso, priorizando los que más impactan el peso no asignado si quedan afuera. 
+// Se ordenan los paquetes de mayor a menor peso porque los más pesados son los más difíciles de ubicar. Al asignarlos primero
+// se evita que queden fuera de la solución por falta de espacio, mientras que los paquetes más livianos pueden utilizar los huecos
+// de capacidad remanentes en los camiones, mejorando el aprovechamiento de la carga total.
 // Para cada paquete se selecciona el camión válido con menor capacidad restante que pueda alojar el paquete, 
 // minimizando el desperdicio de espacio.
 // Si el paquete contiene alimentos, sólo se consideran camiones refrigerados.
 // Si el paquete no contiene alimentos, primero se consideran camiones no refrigerados; si ninguno puede transportarlo,
-//  se consideran camiones refrigerados.
-// De esta forma se intenta reservar los camiones refrigerados, que son más flexibles.
+//  se consideran camiones refrigerados. De esta forma se intenta reservar los camiones refrigerados, que son más flexibles.
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -30,9 +31,6 @@ public class Greedy {
         List<Paquete> paquetesOrdenados = new ArrayList<>(paquetes);
         paquetesOrdenados.sort(Comparator.comparingInt(Paquete::getPeso).reversed());
 
-        //No hace falta ordenar porque con los if ya manejo la prioridad.
-        // List<Camion> camionesOrdenados= new ArrayList<>(camiones);
-        // camionesOrdenados.sort(Comparator.comparing(Camion::estaRefrigerado)); 
 
 
         for (Paquete paquete : paquetesOrdenados) {
